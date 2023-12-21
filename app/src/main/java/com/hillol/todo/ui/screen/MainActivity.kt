@@ -1,5 +1,7 @@
 package com.hillol.todo.ui.screen
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,42 +13,37 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.hillol.todo.ui.theme.ToDoTheme
+import com.hillol.todo.utils.OpenScreenUtils
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            previewUI()
+            MainActivityUI()
         }
     }
 
-
-    fun openScreen() {
-
+    fun openScreen(context: Context) {
+        OpenScreenUtils.goToToDoListScreen(context as Activity)
     }
 }
-
+@Preview(showBackground = true)
 @Composable
-fun previewUI() {
+fun MainActivityUI() {
     ToDoTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = Color.Black
         ) {
-            Column () {
+            Column() {
                 Greeting("Android")
-                goToToDoScreen(onClick = { MainActivity().openScreen() })
+                GoToToDoScreen()
             }
         }
     }
-}
-
-
-@Composable
-fun NavGraph() {
-
 }
 
 @Composable
@@ -59,16 +56,11 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun goToToDoScreen(onClick: () -> Unit, modifier: Modifier = Modifier) {
-    Button(onClick = onClick) {
+fun GoToToDoScreen() {
+    val context = LocalContext.current
+    Button(onClick = { MainActivity().openScreen(context) }) {
         Text(text = "Open To-Do List")
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    previewUI()
 }
 
 
