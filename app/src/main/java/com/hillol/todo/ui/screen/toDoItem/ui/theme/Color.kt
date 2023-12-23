@@ -1,4 +1,4 @@
-package com.hillol.todo.ui.screen.todoListScreen.ui.theme
+package com.hillol.todo.ui.screen.toDoItem.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

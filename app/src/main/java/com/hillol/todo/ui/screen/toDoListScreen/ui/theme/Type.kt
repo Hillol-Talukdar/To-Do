@@ -1,4 +1,4 @@
-package com.hillol.todo.ui.screen.todoListScreen.ui.theme
+package com.hillol.todo.ui.screen.toDoListScreen.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

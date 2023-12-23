@@ -1,4 +1,4 @@
-package com.hillol.todo.ui.screen.todoListScreen
+package com.hillol.todo.ui.screen.toDoListScreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.hillol.todo.ui.screen.todoListScreen.ui.theme.ToDoTheme
+import com.hillol.todo.ui.screen.toDoListScreen.ui.theme.ToDoTheme
 
 class ToDoListScreenView {
     @Preview(showBackground = true)

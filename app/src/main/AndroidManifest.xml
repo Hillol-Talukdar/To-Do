@@ -13,7 +13,12 @@
         android:theme="@style/Theme.ToDo"
         tools:targetApi="31">
         <activity
-            android:name=".ui.screen.todoListScreen.ToDoListScreen"
+            android:name=".ui.screen.toDoItem.ToDoItemScreenActivity"
+            android:exported="false"
+            android:label="@string/title_activity_to_do_screen"
+            android:theme="@style/Theme.ToDo" />
+        <activity
+            android:name=".ui.screen.toDoListScreen.ToDoListScreenActivity"
             android:exported="false"
             android:label="@string/title_activity_to_do_list_screen"
             android:theme="@style/Theme.ToDo" />
