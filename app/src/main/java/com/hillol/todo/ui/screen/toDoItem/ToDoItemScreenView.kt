@@ -1,7 +1,11 @@
 package com.hillol.todo.ui.screen.toDoItem
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,7 +23,7 @@ class ToDoItemScreenView {
     fun TodoScreenUI(modifier: Modifier = Modifier) {
         ToDoTheme {
             Surface(
-                modifier = Modifier.fillMaxSize(),
+                modifier = modifier.fillMaxSize(),
                 color = Color.Black
             ) {
                 ListLayout()
@@ -31,8 +35,10 @@ class ToDoItemScreenView {
     fun ListLayout(modifier: Modifier = Modifier) {
         ConstraintLayout(
             modifier = modifier
-                .fillMaxSize()
-                .background(color = Color.DarkGray)
+                .fillMaxWidth()
+                .padding(10.dp)
+                .background(color = Color(android.graphics.Color.parseColor("#363f4d")))
+                .height(IntrinsicSize.Max)
         ) {
             val (titleText, descriptionText) = createRefs()
 
@@ -40,22 +46,26 @@ class ToDoItemScreenView {
                 text = "Title",
                 color = Color.White,
                 fontSize = 20.sp,
-                modifier = Modifier.constrainAs(titleText) {
-                    top.linkTo(parent.top, margin = 10.dp)
-                    start.linkTo(parent.start, margin = 10.dp)
-                    end.linkTo(parent.end, margin = 10.dp)
-                }
+                modifier = modifier
+                    .constrainAs(titleText) {
+                        top.linkTo(parent.top)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
+                    .padding(8.dp)
             )
 
             Text(
                 text = "description",
                 color = Color.White,
                 fontSize = 16.sp,
-                modifier = Modifier.constrainAs(descriptionText) {
-                    top.linkTo(titleText.bottom, margin = 2.dp)
-                    start.linkTo(titleText.start)
-                    end.linkTo(titleText.end)
-                }
+                modifier = modifier
+                    .constrainAs(descriptionText) {
+                        top.linkTo(titleText.bottom, margin = 2.dp)
+                        start.linkTo(titleText.start)
+                        end.linkTo(titleText.end)
+                    }
+                    .padding(8.dp)
             )
         }
     }
