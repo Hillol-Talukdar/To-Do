@@ -15,24 +15,25 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import com.hillol.todo.data.model.NoteItemModel
 import com.hillol.todo.ui.screen.toDoListScreen.ui.theme.ToDoTheme
 
 class ToDoItemScreenView {
     @Preview(showBackground = true)
     @Composable
-    fun TodoScreenUI(modifier: Modifier = Modifier) {
+    fun TodoScreenUI(noteItem: NoteItemModel? = null, modifier: Modifier = Modifier) {
         ToDoTheme {
             Surface(
                 modifier = modifier.fillMaxSize(),
                 color = Color.Black
             ) {
-                ListLayout()
+                ListLayout(noteItem)
             }
         }
     }
 
     @Composable
-    fun ListLayout(modifier: Modifier = Modifier) {
+    fun ListLayout(noteItem: NoteItemModel?, modifier: Modifier = Modifier) {
         ConstraintLayout(
             modifier = modifier
                 .fillMaxWidth()
@@ -43,7 +44,7 @@ class ToDoItemScreenView {
             val (titleText, descriptionText) = createRefs()
 
             Text(
-                text = "Title",
+                text = noteItem?.title ?: "title",
                 color = Color.White,
                 fontSize = 20.sp,
                 modifier = modifier
@@ -56,7 +57,7 @@ class ToDoItemScreenView {
             )
 
             Text(
-                text = "description",
+                text = noteItem?.description ?: "description",
                 color = Color.White,
                 fontSize = 16.sp,
                 modifier = modifier

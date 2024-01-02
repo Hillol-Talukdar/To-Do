@@ -1,7 +1,8 @@
 package com.hillol.todo.data.model
 
-data class noteItemModel(
+data class NoteItemModel(
     var title: String,
-    var description: String) {
+    var description: String
+) {
 
 }
