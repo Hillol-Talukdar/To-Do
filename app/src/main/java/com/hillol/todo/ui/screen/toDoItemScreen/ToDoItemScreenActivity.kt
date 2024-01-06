@@ -1,4 +1,4 @@
-package com.hillol.todo.ui.screen.toDoItem
+package com.hillol.todo.ui.screen.toDoItemScreen
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

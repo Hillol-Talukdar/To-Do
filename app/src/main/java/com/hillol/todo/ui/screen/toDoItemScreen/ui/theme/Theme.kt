@@ -1,4 +1,4 @@
-package com.hillol.todo.ui.screen.toDoItem.ui.theme
+package com.hillol.todo.ui.screen.toDoItemScreen.ui.theme
 
 import android.app.Activity
 import android.os.Build

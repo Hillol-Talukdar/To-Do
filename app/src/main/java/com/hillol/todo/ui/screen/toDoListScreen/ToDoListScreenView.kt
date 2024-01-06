@@ -12,7 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hillol.todo.data.model.NoteItemModel
 import com.hillol.todo.data.utils.NoteData
-import com.hillol.todo.ui.screen.toDoItem.ToDoItemScreenView
+import com.hillol.todo.ui.screen.toDoItemScreen.ToDoItemScreenView
 import com.hillol.todo.ui.screen.toDoListScreen.ui.theme.ToDoTheme
 
 class ToDoListScreenView {

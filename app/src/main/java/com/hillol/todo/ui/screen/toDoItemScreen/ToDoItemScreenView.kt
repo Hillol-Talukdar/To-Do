@@ -1,4 +1,4 @@
-package com.hillol.todo.ui.screen.toDoItem
+package com.hillol.todo.ui.screen.toDoItemScreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.IntrinsicSize
