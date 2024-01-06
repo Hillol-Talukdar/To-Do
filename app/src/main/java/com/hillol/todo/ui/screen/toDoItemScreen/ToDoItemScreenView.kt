@@ -27,7 +27,7 @@ class ToDoItemScreenView {
                 modifier = modifier.fillMaxSize(),
                 color = Color.Black
             ) {
-                ListLayout(noteItem)
+                ListLayout(noteItem, modifier)
             }
         }
     }
