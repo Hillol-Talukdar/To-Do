@@ -24,30 +24,26 @@ class ToDoListScreenView {
                 modifier = modifier.fillMaxSize(),
                 color = Color.Black
             ) {
-                toDoRecyclerView()
+                ToDoRecyclerView()
             }
         }
     }
 
     @Composable
-    fun toDoRecyclerView(modifier: Modifier = Modifier) {
+    fun ToDoRecyclerView(modifier: Modifier = Modifier) {
         LazyColumn(
             modifier = modifier
                 .fillMaxSize()
                 .padding(5.dp)
         ) {
             items ( NoteData.noteList ) { noteItem ->
-                toDoRecyclerViewItem(noteItem)
-
+                ToDoRecyclerViewItem(noteItem)
             }
-//            items(4) { index ->
-//                toDoRecyclerViewItem()
-//            }
         }
     }
 
     @Composable
-    fun toDoRecyclerViewItem(noteItem: NoteItemModel) {
+    fun ToDoRecyclerViewItem(noteItem: NoteItemModel) {
         val toDoItemScreenView = ToDoItemScreenView()
         toDoItemScreenView.TodoScreenUI(noteItem)
     }
