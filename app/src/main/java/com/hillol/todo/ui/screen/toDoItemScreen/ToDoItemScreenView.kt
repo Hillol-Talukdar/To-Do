@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import com.hillol.todo.data.model.NoteItemModel
 import com.hillol.todo.ui.screen.toDoListScreen.ui.theme.ToDoTheme
 
@@ -52,6 +53,7 @@ class ToDoItemScreenView {
                         top.linkTo(parent.top)
                         start.linkTo(parent.start)
                         end.linkTo(parent.end)
+                        width = Dimension.matchParent
                     }
                     .padding(8.dp)
             )
@@ -65,6 +67,7 @@ class ToDoItemScreenView {
                         top.linkTo(titleText.bottom, margin = 2.dp)
                         start.linkTo(titleText.start)
                         end.linkTo(titleText.end)
+                        width = Dimension.matchParent
                     }
                     .padding(8.dp)
             )
