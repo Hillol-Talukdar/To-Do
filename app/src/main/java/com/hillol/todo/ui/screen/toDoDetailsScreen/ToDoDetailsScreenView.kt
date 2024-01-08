@@ -1,5 +1,6 @@
 package com.hillol.todo.ui.screen.toDoDetailsScreen
 
+import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
@@ -13,8 +14,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import com.hillol.todo.data.model.NoteItemModel
 
 class ToDoDetailsScreenView {
+    private var noteItem: NoteItemModel? = null
+
+    @Composable
+    fun OnCreate(noteItemModel: NoteItemModel?) {
+        noteItem = noteItemModel
+        ToDoDetailsScreenUI()
+    }
+
     @Preview(showBackground = true)
     @Composable
     fun ToDoDetailsScreenUI(modifier: Modifier = Modifier) {
@@ -30,6 +40,7 @@ class ToDoDetailsScreenView {
 
     @Composable
     fun ScreenLayout(modifier: Modifier = Modifier) {
+
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxSize()
@@ -38,7 +49,7 @@ class ToDoDetailsScreenView {
             val (titleText, descriptionText) = createRefs()
 
             Text(
-                text = "Tile",
+                text = noteItem?.title ?: "title",
                 color = Color.White,
                 fontSize = 20.sp,
                 modifier = modifier
@@ -51,7 +62,7 @@ class ToDoDetailsScreenView {
             )
 
             Text(
-                text = "description",
+                text = noteItem?.description ?: "description",
                 color = Color.White,
                 fontSize = 16.sp,
                 modifier = modifier

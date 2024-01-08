@@ -2,6 +2,7 @@ package com.hillol.todo.utils
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Bundle
 import com.hillol.todo.ui.screen.toDoDetailsScreen.ToDoDetailsScreenActivity
 import com.hillol.todo.ui.screen.toDoListScreen.ToDoListScreenActivity
 
@@ -14,8 +15,15 @@ object OpenScreenUtils {
         activity.finish()
     }
 
-    fun goToToDoDetailsScreen(activity: Activity) {
+    fun goToToDoDetailsScreen(activity: Activity, data: Bundle?, shouldFinish: Boolean) {
         val intent = Intent(activity, ToDoDetailsScreenActivity::class.java)
+        data?.let {
+            intent.putExtras(it)
+        }
+
         activity.startActivity(intent)
+        if (shouldFinish) {
+            activity.finish()
+        }
     }
 }

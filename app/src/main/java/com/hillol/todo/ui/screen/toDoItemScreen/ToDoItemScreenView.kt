@@ -1,6 +1,7 @@
 package com.hillol.todo.ui.screen.toDoItemScreen
 
 import android.app.Activity
+import android.os.Bundle
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -48,7 +49,9 @@ class ToDoItemScreenView {
                 .padding(10.dp)
                 .background(color = Color(android.graphics.Color.parseColor("#363f4d")))
                 .height(IntrinsicSize.Max)
-                .clickable { OpenScreenUtils.goToToDoDetailsScreen(activity) }
+                .clickable {
+                    goToToDoDetailsScreen(activity, noteItem)
+                }
         ) {
             val (titleText, descriptionText) = createRefs()
 
@@ -80,5 +83,11 @@ class ToDoItemScreenView {
                     .padding(8.dp)
             )
         }
+    }
+
+    private fun goToToDoDetailsScreen(activity: Activity, noteItem: NoteItemModel?) {
+        val bundle = Bundle()
+        bundle.putSerializable("NoteItemModel", noteItem)
+        OpenScreenUtils.goToToDoDetailsScreen(activity, bundle, false)
     }
 }

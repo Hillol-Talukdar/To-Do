@@ -3,7 +3,6 @@ package com.hillol.todo.ui.screen.toDoListScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.hillol.todo.data.model.NoteItemModel
 import com.hillol.todo.data.utils.NoteData
 
 class ToDoListScreenActivity : ComponentActivity() {
