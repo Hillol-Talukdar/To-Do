@@ -1,6 +1,8 @@
 package com.hillol.todo.ui.screen.toDoItemScreen
 
+import android.app.Activity
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,29 +20,35 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.hillol.todo.data.model.NoteItemModel
 import com.hillol.todo.ui.screen.toDoListScreen.ui.theme.ToDoTheme
+import com.hillol.todo.utils.OpenScreenUtils
 
 class ToDoItemScreenView {
     @Preview(showBackground = true)
     @Composable
-    fun TodoScreenUI(noteItem: NoteItemModel? = null, modifier: Modifier = Modifier) {
+    fun TodoScreenUI(
+        activity: Activity? = ToDoItemScreenActivity.createDefault(),
+        noteItem: NoteItemModel? = null,
+        modifier: Modifier = Modifier
+    ) {
         ToDoTheme {
             Surface(
                 modifier = modifier.fillMaxSize(),
                 color = Color.Black
             ) {
-                ListLayout(noteItem, modifier)
+                ListLayout(activity!!, noteItem, modifier)
             }
         }
     }
 
     @Composable
-    fun ListLayout(noteItem: NoteItemModel?, modifier: Modifier = Modifier) {
+    fun ListLayout(activity: Activity, noteItem: NoteItemModel?, modifier: Modifier = Modifier) {
         ConstraintLayout(
             modifier = modifier
                 .fillMaxWidth()
                 .padding(10.dp)
                 .background(color = Color(android.graphics.Color.parseColor("#363f4d")))
                 .height(IntrinsicSize.Max)
+                .clickable { OpenScreenUtils.goToToDoDetailsScreen(activity) }
         ) {
             val (titleText, descriptionText) = createRefs()
 

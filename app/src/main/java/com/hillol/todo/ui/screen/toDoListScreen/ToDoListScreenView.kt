@@ -1,5 +1,6 @@
 package com.hillol.todo.ui.screen.toDoListScreen
 
+import android.app.Activity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -18,33 +19,33 @@ import com.hillol.todo.ui.screen.toDoListScreen.ui.theme.ToDoTheme
 class ToDoListScreenView {
     @Preview(showBackground = true)
     @Composable
-    fun TodoScreenUI(modifier: Modifier = Modifier) {
+    fun TodoScreenUI(activity: Activity = Activity(), modifier: Modifier = Modifier) {
         ToDoTheme {
             Surface(
                 modifier = modifier.fillMaxSize(),
                 color = Color.Black
             ) {
-                ToDoRecyclerView()
+                ToDoRecyclerView(activity)
             }
         }
     }
 
     @Composable
-    fun ToDoRecyclerView(modifier: Modifier = Modifier) {
+    fun ToDoRecyclerView(activity: Activity, modifier: Modifier = Modifier) {
         LazyColumn(
             modifier = modifier
                 .fillMaxSize()
                 .padding(5.dp)
         ) {
-            items ( NoteData.noteList ) { noteItem ->
-                ToDoRecyclerViewItem(noteItem)
+            items(NoteData.noteList) { noteItem ->
+                ToDoRecyclerViewItem(activity, noteItem)
             }
         }
     }
 
     @Composable
-    fun ToDoRecyclerViewItem(noteItem: NoteItemModel) {
+    fun ToDoRecyclerViewItem(activity: Activity, noteItem: NoteItemModel) {
         val toDoItemScreenView = ToDoItemScreenView()
-        toDoItemScreenView.TodoScreenUI(noteItem)
+        toDoItemScreenView.TodoScreenUI(activity, noteItem)
     }
 }

@@ -14,7 +14,7 @@ class ToDoListScreenActivity : ComponentActivity() {
         NoteData.noteList = ArrayList()
 
         setContent {
-            todoListScreenView.TodoScreenUI()
+            todoListScreenView.TodoScreenUI(this)
         }
     }
 }
