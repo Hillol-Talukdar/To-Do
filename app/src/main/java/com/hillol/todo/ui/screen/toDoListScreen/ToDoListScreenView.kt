@@ -11,8 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.hillol.todo.data.model.NoteItemModel
-import com.hillol.todo.data.utils.NoteData
+import com.hillol.todo.data.model.Note
+import com.hillol.todo.data.utils.NoteDataUtils
 import com.hillol.todo.ui.screen.toDoItemScreen.ToDoItemScreenView
 import com.hillol.todo.ui.screen.toDoListScreen.ui.theme.ToDoTheme
 
@@ -37,14 +37,14 @@ class ToDoListScreenView {
                 .fillMaxSize()
                 .padding(5.dp)
         ) {
-            items(NoteData.noteList) { noteItem ->
+            items(NoteDataUtils.noteList) { noteItem ->
                 ToDoRecyclerViewItem(activity, noteItem)
             }
         }
     }
 
     @Composable
-    fun ToDoRecyclerViewItem(activity: Activity, noteItem: NoteItemModel) {
+    fun ToDoRecyclerViewItem(activity: Activity, noteItem: Note) {
         val toDoItemScreenView = ToDoItemScreenView()
         toDoItemScreenView.TodoScreenUI(activity, noteItem)
     }

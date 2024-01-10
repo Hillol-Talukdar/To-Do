@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import com.hillol.todo.data.model.NoteItemModel
+import com.hillol.todo.data.model.Note
 import com.hillol.todo.ui.screen.toDoListScreen.ui.theme.ToDoTheme
 import com.hillol.todo.utils.OpenScreenUtils
 
@@ -28,7 +28,7 @@ class ToDoItemScreenView {
     @Composable
     fun TodoScreenUI(
         activity: Activity? = ToDoItemScreenActivity.createDefault(),
-        noteItem: NoteItemModel? = null,
+        noteItem: Note? = null,
         modifier: Modifier = Modifier
     ) {
         ToDoTheme {
@@ -42,7 +42,7 @@ class ToDoItemScreenView {
     }
 
     @Composable
-    fun ListLayout(activity: Activity, noteItem: NoteItemModel?, modifier: Modifier = Modifier) {
+    fun ListLayout(activity: Activity, noteItem: Note?, modifier: Modifier = Modifier) {
         ConstraintLayout(
             modifier = modifier
                 .fillMaxWidth()
@@ -85,7 +85,7 @@ class ToDoItemScreenView {
         }
     }
 
-    private fun goToToDoDetailsScreen(activity: Activity, noteItem: NoteItemModel?) {
+    private fun goToToDoDetailsScreen(activity: Activity, noteItem: Note?) {
         val bundle = Bundle()
         bundle.putSerializable("NoteItemModel", noteItem)
         OpenScreenUtils.goToToDoDetailsScreen(activity, bundle, false)

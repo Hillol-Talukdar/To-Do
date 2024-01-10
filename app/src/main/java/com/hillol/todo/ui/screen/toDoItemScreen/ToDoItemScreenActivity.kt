@@ -3,7 +3,7 @@ package com.hillol.todo.ui.screen.toDoItemScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.hillol.todo.data.utils.NoteData
+import com.hillol.todo.data.utils.NoteDataUtils
 
 class ToDoItemScreenActivity : ComponentActivity() {
     companion object {
@@ -14,7 +14,7 @@ class ToDoItemScreenActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            toDoItemScreenView.TodoScreenUI(this, NoteData.noteList[0])
+            toDoItemScreenView.TodoScreenUI(this, NoteDataUtils.noteList[0])
         }
     }
 }

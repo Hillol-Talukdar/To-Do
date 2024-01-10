@@ -3,11 +3,11 @@ package com.hillol.todo.ui.screen.toDoDetailsScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.hillol.todo.data.model.NoteItemModel
+import com.hillol.todo.data.model.Note
 
 class ToDoDetailsScreenActivity : ComponentActivity() {
     private val toDoDetailsScreenView = ToDoDetailsScreenView()
-    private var noteItemModel: NoteItemModel? = null
+    private var note: Note? = null
         get() = field
         set(value) {
             field = value
@@ -17,12 +17,12 @@ class ToDoDetailsScreenActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         getSerializedData()
         setContent {
-            toDoDetailsScreenView.OnCreate(noteItemModel)
+            toDoDetailsScreenView.OnCreate(note)
         }
     }
 
     private fun getSerializedData() {
         val receivedBundle = intent.extras
-        noteItemModel = receivedBundle?.getSerializable("NoteItemModel") as NoteItemModel?
+        note = receivedBundle?.getSerializable("NoteItemModel") as Note?
     }
 }

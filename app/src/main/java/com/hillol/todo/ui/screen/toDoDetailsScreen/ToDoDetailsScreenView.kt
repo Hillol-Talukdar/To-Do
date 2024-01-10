@@ -1,6 +1,5 @@
 package com.hillol.todo.ui.screen.toDoDetailsScreen
 
-import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
@@ -14,14 +13,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import com.hillol.todo.data.model.NoteItemModel
+import com.hillol.todo.data.model.Note
 
 class ToDoDetailsScreenView {
-    private var noteItem: NoteItemModel? = null
+    private var noteItem: Note? = null
 
     @Composable
-    fun OnCreate(noteItemModel: NoteItemModel?) {
-        noteItem = noteItemModel
+    fun OnCreate(note: Note?) {
+        noteItem = note
         ToDoDetailsScreenUI()
     }
 
