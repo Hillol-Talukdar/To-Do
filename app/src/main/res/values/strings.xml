@@ -45,4 +45,5 @@
     </string>
     <string name="title_activity_to_do_screen">ToDoScreenActivity</string>
     <string name="title_activity_to_do_details_screen">ToDoDetailsScreenActivity</string>
+    <string name="title_activity_splash_screen">splashScreen</string>
 </resources>

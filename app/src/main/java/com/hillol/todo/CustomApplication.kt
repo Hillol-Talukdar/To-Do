@@ -1,11 +1,14 @@
 package com.hillol.todo
 
 import android.app.Application
+import android.util.Log
 import androidx.room.Room
 import com.hillol.todo.data.database.noteDataBase.NoteDatabase
+import kotlin.math.log
 
 class CustomApplication : Application() {
     companion object {
+        private const val TAG = "CustomApplication"
         lateinit var noteDb: NoteDatabase
     }
 
@@ -15,7 +18,12 @@ class CustomApplication : Application() {
     }
 
     private fun initDataBase() {
-        noteDb = Room.databaseBuilder(applicationContext, NoteDatabase::class.java, "note_database")
-            .build()
+        try {
+            noteDb =
+                Room.databaseBuilder(applicationContext, NoteDatabase::class.java, "note_database")
+                    .build()
+        } catch (ex: Exception) {
+            Log.e(TAG, "initDataBase: ", ex)
+        }
     }
 }
