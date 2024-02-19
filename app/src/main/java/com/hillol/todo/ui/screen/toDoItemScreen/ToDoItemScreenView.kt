@@ -14,11 +14,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import com.hillol.todo.R
 import com.hillol.todo.data.model.Note
 import com.hillol.todo.ui.screen.toDoListScreen.ui.theme.ToDoTheme
 import com.hillol.todo.utils.OpenScreenUtils
@@ -47,7 +49,7 @@ class ToDoItemScreenView {
             modifier = modifier
                 .fillMaxWidth()
                 .padding(10.dp)
-                .background(color = Color(android.graphics.Color.parseColor("#363f4d")))
+                .background(color =  colorResource(R.color.north_sea_blue))
                 .height(IntrinsicSize.Max)
                 .clickable {
                     goToToDoDetailsScreen(activity, noteItem)

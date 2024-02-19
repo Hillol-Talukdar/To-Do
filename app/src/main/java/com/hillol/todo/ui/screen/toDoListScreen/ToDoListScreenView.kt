@@ -1,25 +1,18 @@
 package com.hillol.todo.ui.screen.toDoListScreen
 
 import android.app.Activity
+import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.hillol.todo.data.model.Note
-import com.hillol.todo.data.utils.NoteDataUtils
 import com.hillol.todo.ui.screen.toDoItemScreen.ToDoItemScreenView
 import com.hillol.todo.ui.screen.toDoListScreen.ui.theme.ToDoTheme
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -33,20 +26,34 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import com.hillol.todo.R
+import com.hillol.todo.data.utils.NoteDataUtils
 
 
 class ToDoListScreenView {
+    private val TAG = "ToDoListScreenView"
     private var todoListScreenViewModel: ToDoListScreenViewModel? = null
+    private var noteList = NoteDataUtils.noteList
 
     @Composable
     fun OnCreate(activity: Activity, todoListScreenViewModel: ToDoListScreenViewModel) {
         this.todoListScreenViewModel = todoListScreenViewModel
+        initObserver(activity)
         TodoScreenUI(activity)
+    }
+
+    private fun initObserver(activity: Activity) {
+        todoListScreenViewModel?.noteList!!.observe(activity as LifecycleOwner, Observer {
+            Log.d(TAG, "initObserver: ${it.size}")
+            noteList = it
+        })
     }
 
     @Preview(showBackground = true)
@@ -87,7 +94,7 @@ class ToDoListScreenView {
             value = query,
             onValueChange = {
                 query = it
-//                onSearch(it)
+                todoListScreenViewModel?.onSearch(it)
             },
             placeholder = {
                 Icon(
@@ -100,12 +107,13 @@ class ToDoListScreenView {
             ),
             keyboardActions = KeyboardActions(
                 onSearch = {
-//                    onSearch(query)
+                    todoListScreenViewModel?.onSearch(query)
                 }
             ),
             colors = TextFieldDefaults.textFieldColors(
                 textColor = MaterialTheme.colorScheme.onSurface,
-                cursorColor = MaterialTheme.colorScheme.primary
+                cursorColor = MaterialTheme.colorScheme.primary,
+                containerColor = colorResource(id = R.color.north_sea_blue),
             )
         )
     }
@@ -115,7 +123,7 @@ class ToDoListScreenView {
         LazyColumn(
             modifier = modifier.background(Color.Black)
         ) {
-            items(NoteDataUtils.noteList) { noteItem ->
+            items(noteList) { noteItem ->
                 ToDoRecyclerViewItem(activity, noteItem)
             }
         }
