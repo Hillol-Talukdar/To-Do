@@ -123,7 +123,7 @@ class ToDoListScreenView {
         LazyColumn(
             modifier = modifier.background(Color.Black)
         ) {
-            items(noteList) { noteItem ->
+            items(NoteDataUtils.noteList) { noteItem ->
                 ToDoRecyclerViewItem(activity, noteItem)
             }
         }
