@@ -22,6 +22,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,29 +37,42 @@ import androidx.lifecycle.Observer
 import com.hillol.todo.R
 import com.hillol.todo.data.utils.NoteDataUtils
 
-
 class ToDoListScreenView {
     private val TAG = "ToDoListScreenView"
     private var todoListScreenViewModel: ToDoListScreenViewModel? = null
-    private var noteList = NoteDataUtils.noteList
 
     @Composable
     fun OnCreate(activity: Activity, todoListScreenViewModel: ToDoListScreenViewModel) {
         this.todoListScreenViewModel = todoListScreenViewModel
-        initObserver(activity)
-        TodoScreenUI(activity)
+        InitObserver(activity)
     }
 
-    private fun initObserver(activity: Activity) {
-        todoListScreenViewModel?.noteList!!.observe(activity as LifecycleOwner, Observer {
-            Log.d(TAG, "initObserver: ${it.size}")
-            noteList = it
-        })
+    @Composable
+    fun InitObserver(activity: Activity) {
+        val noteListState = remember { mutableStateOf<List<Note>>(NoteDataUtils.noteList) }
+
+        LaunchedEffect(todoListScreenViewModel?.noteList) {
+            todoListScreenViewModel?.noteList?.observe(
+                activity as LifecycleOwner,
+                Observer { newList ->
+                    noteListState.value = if (newList == null || newList.isEmpty()) {
+                        NoteDataUtils.noteList
+                    } else {
+                        newList
+                    }
+                })
+        }
+
+        TodoScreenUI(activity, noteListState.value as ArrayList<Note>)
     }
 
     @Preview(showBackground = true)
     @Composable
-    fun TodoScreenUI(activity: Activity = Activity(), modifier: Modifier = Modifier) {
+    fun TodoScreenUI(
+        activity: Activity = Activity(),
+        noteList: ArrayList<Note> = ArrayList<Note>(),
+        modifier: Modifier = Modifier
+    ) {
         ToDoTheme {
             ConstraintLayout(
                 modifier = modifier
@@ -74,13 +88,16 @@ class ToDoListScreenView {
                     width = Dimension.matchParent
                 })
 
-                ToDoRecyclerView(activity, modifier = Modifier.constrainAs(toDoRecyclerView) {
-                    top.linkTo(searchBar.bottom)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                    bottom.linkTo(parent.bottom)
-                    height = Dimension.fillToConstraints
-                })
+                ToDoRecyclerView(
+                    activity,
+                    noteList,
+                    modifier = Modifier.constrainAs(toDoRecyclerView) {
+                        top.linkTo(searchBar.bottom)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                        bottom.linkTo(parent.bottom)
+                        height = Dimension.fillToConstraints
+                    })
             }
         }
     }
@@ -119,11 +136,15 @@ class ToDoListScreenView {
     }
 
     @Composable
-    fun ToDoRecyclerView(activity: Activity, modifier: Modifier = Modifier) {
+    fun ToDoRecyclerView(
+        activity: Activity,
+        noteList: ArrayList<Note> = ArrayList<Note>(),
+        modifier: Modifier = Modifier
+    ) {
         LazyColumn(
             modifier = modifier.background(Color.Black)
         ) {
-            items(NoteDataUtils.noteList) { noteItem ->
+            items(noteList) { noteItem ->
                 ToDoRecyclerViewItem(activity, noteItem)
             }
         }
